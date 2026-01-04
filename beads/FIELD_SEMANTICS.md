@@ -124,12 +124,31 @@ exists—this is for SecretObject-level default only. Updated design.
 
 ---
 
+## estimate (`-e`, `--estimate`) [v0.29+]
+
+**What it is**: Time estimate for the work.
+
+**Characteristics**:
+- Optional planning field
+- Accepts minutes or human-readable format
+- Useful for prioritization and capacity planning
+
+**Format**:
+```bash
+bd create "Fix bug" -e 30           # 30 minutes
+bd create "Add feature" -e 2h       # 2 hours
+bd create "Refactor module" -e 1d   # 1 day
+```
+
+---
+
 ## Quick Reference
 
-| Field | Mutable? | Survives Compaction? | One-liner |
-|-------|----------|---------------------|-----------|
-| title | Rarely | Yes | What |
-| description | No | Yes (summarized) | Why |
-| design | Yes | Maybe | How |
-| acceptance | Rarely | Yes | Done when |
-| notes | Append | Yes (summarized) | Progress |
+| Field | Flag | Mutable? | Survives Compaction? | One-liner |
+|-------|------|----------|---------------------|-----------|
+| title | positional | Rarely | Yes | What |
+| description | `-d` | No | Yes (summarized) | Why |
+| design | `--design` | Yes | Maybe | How |
+| acceptance | `--acceptance` | Rarely | Yes | Done when |
+| notes | (update) | Append | Yes (summarized) | Progress |
+| estimate | `-e` | Yes | Yes | How long |

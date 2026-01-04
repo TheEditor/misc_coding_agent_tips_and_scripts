@@ -132,6 +132,16 @@ After filing a discovered issue, should you continue your current work or switch
 
 **When uncertain:** File the issue with good context and continue. The issue preserves your knowledge; the priority system will surface it appropriately.
 
+## Using `--suggest-next` [v0.37+]
+
+When closing an issue, use `--suggest-next` to see what work just became unblocked:
+
+```bash
+bd close bd-42 --reason "Implemented" --suggest-next
+```
+
+This shows newly unblocked issues, helping you (or a future agent) find the natural next step without manually running `bd ready`.
+
 ## Anti-Patterns
 
 ### The Scope Creep Trap

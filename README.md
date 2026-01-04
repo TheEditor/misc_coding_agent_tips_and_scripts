@@ -12,6 +12,8 @@ The difference matters. An agent can learn commands from `--help` but can't infe
 
 ### Beads Issue Tracking
 
+Guidance for beads v0.35+. Tested against v0.43.
+
 - [Issue Design Philosophy](beads/ISSUE_DESIGN.md) - Why fields exist and how to use them
 - [Field Semantics](beads/FIELD_SEMANTICS.md) - Description vs design vs acceptance
 - [When to Create Issues](beads/WHEN_TO_CREATE_ISSUES.md) - Recognizing and filing discovered work
@@ -27,6 +29,16 @@ Point your agent to the relevant document when starting a session. For example, 
 When using beads, follow the guidance in:
 https://github.com/TheEditor/misc_coding_agent_tips_and_scripts/blob/main/beads/ISSUE_DESIGN.md
 ```
+
+## Beads Version Notes
+
+These docs focus on single-agent workflows. They don't cover:
+- Multi-agent swarm coordination (`bd swarm`)
+- Formula system (`bd formula`, `bd cook`)
+- Gate commands for async coordination (`bd gate`)
+- Multi-rig routing
+
+If you're using those features, consult the official beads documentation.
 
 ## Related Resources
 
