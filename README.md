@@ -17,6 +17,7 @@ Guidance for beads v0.35+. Tested against v0.43.
 - [Issue Design Philosophy](beads/ISSUE_DESIGN.md) - Why fields exist and how to use them
 - [Field Semantics](beads/FIELD_SEMANTICS.md) - Description vs design vs acceptance
 - [When to Create Issues](beads/WHEN_TO_CREATE_ISSUES.md) - Recognizing and filing discovered work
+- [Code in Issues](beads/CODE_IN_ISSUES.md) - When to include code snippets
 - [Examples](beads/EXAMPLES.md) - Before/after issue creation patterns
 
 ## Usage
