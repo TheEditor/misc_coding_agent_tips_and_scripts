@@ -65,20 +65,28 @@ bd create "Authentication System" \
 ### Child Tasks
 
 ```bash
+# Create first child task
 bd create "Design JWT token structure" \
   -t task -p 1 \
-  --parent bd-a1b2 \
   -d "Need to define what claims go in the JWT and token lifetime." \
   --design "Use standard claims (sub, iat, exp). Add custom 'permissions' claim array. 1 hour lifetime, refresh via separate endpoint." \
   --acceptance "JWT structure documented. Sample token can be generated and validated."
 
+# Link to parent epic (assuming new task got ID bd-c3d4)
+bd dep add bd-a1b2 bd-c3d4 --type parent-child
+
+# Create second child task
 bd create "Implement /auth/login endpoint" \
   -t task -p 1 \
-  --parent bd-a1b2 \
   -d "Users need an endpoint to exchange credentials for JWT." \
   --design "POST /auth/login accepts {username, password}. Validate against user store. Return {token, expires_at} on success." \
   --acceptance "Valid credentials return 200 with JWT. Invalid credentials return 401. Endpoint documented in OpenAPI spec."
+
+# Link to parent epic (assuming new task got ID bd-e5f6)
+bd dep add bd-a1b2 bd-e5f6 --type parent-child
 ```
+
+**Note**: Dependencies are added after issue creation using `bd dep add`. The `--type parent-child` establishes the epic/subtask relationship.
 
 ---
 
