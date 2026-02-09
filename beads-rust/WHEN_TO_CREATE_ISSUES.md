@@ -144,15 +144,60 @@ After filing a discovered issue, should you continue your current work or switch
 
 **Quick capture:** If you only have a minute, use `br q` to create a placeholder issue, then fill in description/design/acceptance later.
 
-## Finding the Next Issue
+## The Agent Work Cycle
+
+### Claiming Work
+
+Use `--claim` to atomically take ownership:
+
+```bash
+br update br-42 --claim
+```
+
+This sets `status=in_progress` and `assignee` in one operation. It also:
+- Fails if the issue is already assigned to someone else
+- Fails if the issue is blocked by open dependencies
+
+Use `--force` to bypass the blocked check if you know what you're doing.
+
+### Finding the Next Issue
 
 After closing an issue, run `br ready` to see what is unblocked and ready to pick up next.
 
-If you're closing a single issue, you can also use:
+### Chained Work with `--suggest-next`
+
+When closing an issue, use `--suggest-next` to see what you just unblocked:
 
 ```bash
-br close br-42 --reason "Implemented" --suggest-next
+br close br-42 --reason "Implemented" --suggest-next --json
 ```
+
+Returns structured data:
+
+```json
+{
+  "closed": [{"id": "br-42", "title": "...", ...}],
+  "skipped": [],
+  "unblocked": [
+    {"id": "br-43", "title": "Dependent task", "priority": 1},
+    {"id": "br-44", "title": "Another dependent", "priority": 2}
+  ]
+}
+```
+
+This enables efficient chained workflows: close → see unblocked → claim next.
+
+### Decomposing Epics
+
+When creating subtasks for an epic, use `--parent` to get hierarchical IDs:
+
+```bash
+br create "Epic: Payment system" --type epic    # → br-abc123
+br create "Add Stripe integration" --parent br-abc123   # → br-abc123.1
+br create "Add PayPal integration" --parent br-abc123   # → br-abc123.2
+```
+
+The hierarchical IDs make the structure visible and keep related work grouped.
 
 ## Anti-Patterns
 
@@ -184,6 +229,13 @@ Risk: Future agent can't act on it. Issue sits forever.
 
 Solution: If you can't write clear acceptance criteria, you don't understand the problem yet. Investigate more or note it in your current issue's design/notes instead.
 
+### The Blocked Start
+*Starting work on a blocked issue*
+
+Risk: Wasted effort, incomplete work, merge conflicts.
+
+Solution: Always use `--claim` which validates the issue isn't blocked. Or check `br show <id>` for blockers first.
+
 ## Summary
 
 | Signal | Action |
@@ -193,3 +245,5 @@ Solution: If you can't write clear acceptance criteria, you don't understand the
 | Trivial + immediate | Just do it |
 | Speculative | Don't create issue |
 | Can't define acceptance criteria | Investigate more first |
+| Ready to start work | `br update <id> --claim` |
+| Finished work | `br close <id> --suggest-next` |
