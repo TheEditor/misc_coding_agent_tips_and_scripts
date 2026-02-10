@@ -1,6 +1,6 @@
 # Beads-Rust Best Practices
 
-This folder adapts the Beads issue-writing guidance for the `beads_rust` tool (`br`).
+Operational guidance for AI agents using the `beads_rust` (`br`) issue tracker.
 
 ## Operational Differences vs classic Beads
 
