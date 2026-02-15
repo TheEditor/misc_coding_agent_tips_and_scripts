@@ -20,6 +20,7 @@ Operational guidance for `br` (beads_rust). Covers issue design, field semantics
 | [Issue Design](agent-operational-guides/beads-rust/ISSUE_DESIGN.md) | Why fields exist and how to use them |
 | [Field Semantics](agent-operational-guides/beads-rust/FIELD_SEMANTICS.md) | Description vs design vs acceptance vs notes |
 | [When to Create Issues](agent-operational-guides/beads-rust/WHEN_TO_CREATE_ISSUES.md) | Recognizing and filing discovered work |
+| [Issues vs Planning Docs](agent-operational-guides/beads-rust/ISSUES_VS_PLANNING_DOCS.md) | Why issues should be self-contained |
 | [Code in Issues](agent-operational-guides/beads-rust/CODE_IN_ISSUES.md) | When to include code snippets |
 | [Examples](agent-operational-guides/beads-rust/EXAMPLES.md) | Before/after issue creation patterns |
 | [Safety](agent-operational-guides/beads-rust/SAFETY.md) | Sync guards, history, data protection |

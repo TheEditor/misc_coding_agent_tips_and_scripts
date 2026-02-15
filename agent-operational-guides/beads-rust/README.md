@@ -63,5 +63,6 @@ Always use `--json` when parsing programmatically.
 - `ISSUE_DESIGN.md`: how to separate description/design/acceptance/notes
 - `FIELD_SEMANTICS.md`: field-by-field reference
 - `EXAMPLES.md`: before/after issue writing patterns
+- `ISSUES_VS_PLANNING_DOCS.md`: why issues should be self-contained, not cross-reference plan files
 - `WHEN_TO_CREATE_ISSUES.md`: how to file discovered work
 - `SAFETY.md`: sync guards, history, and data protection
