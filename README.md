@@ -25,6 +25,19 @@ Operational guidance for `br` (beads_rust). Covers issue design, field semantics
 | [Examples](agent-operational-guides/beads-rust/EXAMPLES.md) | Before/after issue creation patterns |
 | [Safety](agent-operational-guides/beads-rust/SAFETY.md) | Sync guards, history, data protection |
 
+### [Plan-Pact](agent-scripts/plan-pact/)
+
+Cross-agent negotiation protocol for planning documents. Gives multiple reasoning agents (human or software) a shared format for proposing, reviewing, disputing, and closing plans without drift or rewrite loops.
+
+| Document | Purpose |
+|----------|----------|
+| [SKILL.md](agent-scripts/plan-pact/SKILL.md) | Canonical protocol: storage, naming, frontmatter, dispute tracking, review protocol, activation policy |
+| [Plan Template](agent-scripts/plan-pact/templates/plan-template.plan.md) | Starter template for `.plan.md` files with Inspiration section and decision log examples |
+| [ADR Template](agent-scripts/plan-pact/templates/adr-template.adr.md) | Starter template for architecture decision records |
+| [Critique Template](agent-scripts/plan-pact/templates/critique-template.critique.md) | Starter template for plan critiques |
+
+Key concepts: Decision Register (current negotiated position), Decision Log (append-only negotiation history), Inspiration section (accountability anchor for every plan cycle), explicit activation policy (human invokes, agents don't self-activate).
+
 ## Usage
 
 Reference these docs from your AGENTS.md or CLAUDE.md. Example:
@@ -34,6 +47,16 @@ Reference these docs from your AGENTS.md or CLAUDE.md. Example:
 
 This project uses beads_rust (`br`). Follow the guidance at:
 https://raw.githubusercontent.com/TheEditor/misc_coding_agent_tips_and_scripts/main/agent-operational-guides/beads-rust/README.md
+```
+
+To use plan-pact, copy the skill into your agent's skill directory:
+
+```bash
+# For Claude
+cp -r agent-scripts/plan-pact/ .claude/skills/plan-pact/
+
+# For Codex
+cp -r agent-scripts/plan-pact/ .codex/skills/plan-pact/
 ```
 
 Or fetch multiple docs for comprehensive context.
