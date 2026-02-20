@@ -10,7 +10,13 @@ An agent can learn commands from `--help` but can't infer *why* certain patterns
 
 ## Contents
 
-### [Beads-Rust Issue Tracking](agent-operational-guides/beads-rust/)
+---
+
+### Operational Guides
+
+Reference docs for agents. Link to these from your `AGENTS.md` or `CLAUDE.md` so agents understand *why* certain patterns exist and when to apply them.
+
+#### [Best Practices For beads-rust](agent-operational-guides/beads-rust/)
 
 Operational guidance for `br` (beads_rust). Covers issue design, field semantics, and agent workflows.
 
@@ -25,7 +31,13 @@ Operational guidance for `br` (beads_rust). Covers issue design, field semantics
 | [Examples](agent-operational-guides/beads-rust/EXAMPLES.md) | Before/after issue creation patterns |
 | [Safety](agent-operational-guides/beads-rust/SAFETY.md) | Sync guards, history, data protection |
 
-### [br-issue-tracking](agent-scripts/br-issue-tracking/)
+---
+
+### Agent Skills
+
+Copyable skill files for Claude, Codex, and other agents. Drop a skill into your agent's skill directory and it becomes available as a slash command.
+
+#### [br-issue-tracking](agent-scripts/br-issue-tracking/)
 
 Agent skill for tracking multi-session work with `br` (beads_rust). Covers session startup, claiming and closing issues, keeping resumable notes, syncing JSONL/DB, configuring prefixes, migrating from `bd`, and troubleshooting.
 
@@ -35,7 +47,7 @@ Agent skill for tracking multi-session work with `br` (beads_rust). Covers sessi
 
 Key concepts: explicit sync (never automatic git), `--claim` for atomic assignment, resumable notes structure (COMPLETED / IN_PROGRESS / NEXT / BLOCKERS), safety guards against data loss.
 
-### [Plan-Pact](agent-scripts/plan-pact/)
+#### [Plan-Pact](agent-scripts/plan-pact/)
 
 Cross-agent negotiation protocol for planning documents. Gives multiple reasoning agents (human or software) a shared format for proposing, reviewing, disputing, and closing plans without drift or rewrite loops.
 
@@ -48,9 +60,11 @@ Cross-agent negotiation protocol for planning documents. Gives multiple reasonin
 
 Key concepts: Decision Register (current negotiated position), Decision Log (append-only negotiation history), Inspiration section (accountability anchor for every plan cycle), explicit activation policy (human invokes, agents don't self-activate).
 
+---
+
 ## Usage
 
-Reference these docs from your AGENTS.md or CLAUDE.md. Example:
+**Operational guides** — reference from your `AGENTS.md` or `CLAUDE.md`:
 
 ```markdown
 ## Issue Tracking
@@ -59,7 +73,7 @@ This project uses beads_rust (`br`). Follow the guidance at:
 https://raw.githubusercontent.com/TheEditor/misc_coding_agent_tips_and_scripts/main/agent-operational-guides/beads-rust/README.md
 ```
 
-To use a skill, copy it into your agent's skill directory:
+**Agent skills** — copy into your agent's skill directory:
 
 ```bash
 # br-issue-tracking (for Claude)
@@ -70,8 +84,6 @@ cp -r agent-scripts/plan-pact/ .claude/skills/plan-pact/
 
 # For Codex, use .codex/skills/ instead
 ```
-
-Or fetch multiple docs for comprehensive context.
 
 ## Related Resources
 
