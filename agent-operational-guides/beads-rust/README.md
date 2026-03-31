@@ -65,4 +65,6 @@ Always use `--json` when parsing programmatically.
 - `EXAMPLES.md`: before/after issue writing patterns
 - `ISSUES_VS_PLANNING_DOCS.md`: why issues should be self-contained, not cross-reference plan files
 - `WHEN_TO_CREATE_ISSUES.md`: how to file discovered work
+- `SESSION_PROTOCOL.md`: session lifecycle — start, claim, work, close, flush
+- `AGENT_INTEGRATION.md`: wiring best practices into agent toolchains (three-layer model)
 - `SAFETY.md`: sync guards, history, and data protection

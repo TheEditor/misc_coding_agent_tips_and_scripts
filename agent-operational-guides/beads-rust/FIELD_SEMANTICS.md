@@ -110,8 +110,9 @@ Sensitive: true.
 **What it is**: *Progress log*—session checkpoints and decisions.
 
 **Characteristics**:
-- Append-only in practice
+- **Overwrite semantics**: `--notes` replaces existing content. Read before writing.
 - Updated via `br update <id> --notes "..."`
+- To preserve history, read existing notes with `br show <id> --json`, then write combined old + new.
 - Survives compaction (summarized)
 
 **Should contain**:
@@ -121,9 +122,15 @@ Sensitive: true.
 - Handoff context for next session
 
 **Example**:
-```
-2024-12-27: Started implementation. Discovered Field.Sensitive already 
-exists—this is for SecretObject-level default only. Updated design.
+```bash
+# Read existing notes first
+br show br-42 --json | jq -r '.notes'
+
+# Write combined old + new
+br update br-42 --notes "Previous content here...
+---
+2024-12-27: Started implementation. Discovered Field.Sensitive already
+exists—this is for SecretObject-level default only. Updated design."
 ```
 
 ---

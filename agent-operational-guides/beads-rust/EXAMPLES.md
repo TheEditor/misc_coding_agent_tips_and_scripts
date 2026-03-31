@@ -147,6 +147,29 @@ br update br-200 \
 
 ---
 
+## Example 5: Closing with Traceable Reasons
+
+### ❌ Before
+
+```bash
+br close br-123 --reason "Implemented"
+```
+
+**Problem**: No trail back to code. Future agent can't verify what was done.
+
+### ✓ After
+
+```bash
+br close br-123 --reason "Added Sensitive bool to SecretObject with true default — commit e4f5a6b"
+```
+
+**Why it works:**
+- Summarizes what changed (not just "done")
+- Links to the specific commit for verification
+- Stands alone after compaction
+
+---
+
 ## Anti-Patterns to Avoid
 
 1. **The Wall of Text**: Everything in description

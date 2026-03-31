@@ -56,6 +56,17 @@ Think of it like a user story card:
 
 The front answers "what are we doing and why?" The back answers "how are we doing it?"
 
+## Banned Phrases in Descriptions
+
+These phrases signal a non-self-contained issue. Never use them:
+
+- "As discussed" / "as mentioned" / "per our conversation"
+- "Per the spec" / "see the plan" / "reference: planning-doc.md"
+- "The auth issue from earlier" / "the thing we talked about"
+- "You know what I mean" / "the usual approach"
+
+**The test**: Could a fresh agent, with zero session history, understand and implement this issue from `br show` alone? If any phrase requires shared context to parse, rewrite it with the actual information.
+
 ## When Creating Issues
 
 Ask yourself:
