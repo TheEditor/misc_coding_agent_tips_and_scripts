@@ -22,20 +22,50 @@ This atomically sets `status=in_progress` and `assignee` to the current actor. I
 - Fails if already assigned to someone else
 - Fails if blocked by open dependencies (use `--force` to override)
 
-**Close with `--suggest-next`** for chained workflows:
+**Close with traceable `--reason`** (include what changed + commit ref):
 ```bash
-br close <id> --reason "Implemented feature" --suggest-next --json
+br close <id> --reason "Added PKCE to OAuth login — commit a1b2c3d" --suggest-next --json
 ```
-Returns JSON with `closed`, `skipped`, and `unblocked` arrays showing newly unblocked work.
+Never close with vague reasons like "Done" or "Implemented." Returns JSON with `closed`, `skipped`, and `unblocked` arrays showing newly unblocked work.
+
+**Work is NOT done until `git push` succeeds:**
+```bash
+br sync --flush-only
+git add .beads/
+git commit -m "Close <id>: short summary"
+git push
+```
 
 ## Keep resumable notes
 
-Update notes so another agent can resume with zero conversation history:
+**`--notes` overwrites.** Always read existing notes before writing:
 ```bash
-br update <id> --notes "COMPLETED: ... / IN_PROGRESS: ... / NEXT: ... / BLOCKERS: ..."
+# Read existing
+br show <id> --json | jq -r '.notes'
+
+# Write combined old + new
+br update <id> --notes "Previous content here...
+---
+COMPLETED: ... / IN_PROGRESS: ... / NEXT: ... / BLOCKERS: ..."
 ```
 
 Use a consistent structure (COMPLETED / IN_PROGRESS / NEXT / BLOCKERS / KEY DECISIONS). Update at milestones, before handoffs, or when context is running low.
+
+## Create quality issues
+
+**Separate fields by purpose** — don't stuff everything into `-d`:
+```bash
+br create "Fix OAuth implicit grant → PKCE" -t task -p 1 \
+  -d "Login flow uses deprecated implicit grant. Security risk per OAuth 2.1 spec."
+
+br update <id> \
+  --design "Replace implicit grant with PKCE in auth/oauth.go. Update callback handler." \
+  --acceptance "Login uses PKCE. Implicit grant rejected. Existing sessions unaffected."
+```
+
+**Issues must be self-contained.** A fresh agent with zero session history must be able to work the issue from `br show` alone. Banned phrases in descriptions: "as discussed", "per the spec", "see above", "the issue from earlier."
+
+**Titles must be specific.** "Fix auth" is not traceable; "Fix OAuth implicit grant → PKCE in login flow" is.
 
 ## Use core commands
 
@@ -100,6 +130,16 @@ Environment variables:
 3. Verify with `br list --status open` or `br ready`.
 4. Update docs/instructions to replace `bd` with `br` and use explicit sync.
 5. Preserve existing `bd-*` IDs; new issues use configured prefix.
+
+## Validate with lint
+
+```bash
+br lint                  # Check open issues for missing sections
+br lint --type feature   # Filter by type
+br lint --json           # Machine-readable output
+```
+
+Wire into pre-push hooks to catch issues that slipped through.
 
 ## Troubleshoot quickly
 
