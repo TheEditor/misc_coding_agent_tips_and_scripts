@@ -29,6 +29,8 @@ Operational guidance for `br` (beads_rust). Covers issue design, field semantics
 | [Issues vs Planning Docs](agent-operational-guides/beads-rust/ISSUES_VS_PLANNING_DOCS.md) | Why issues should be self-contained |
 | [Code in Issues](agent-operational-guides/beads-rust/CODE_IN_ISSUES.md) | When to include code snippets |
 | [Examples](agent-operational-guides/beads-rust/EXAMPLES.md) | Before/after issue creation patterns |
+| [Session Protocol](agent-operational-guides/beads-rust/SESSION_PROTOCOL.md) | Session lifecycle — start, claim, work, close, flush |
+| [Agent Integration](agent-operational-guides/beads-rust/AGENT_INTEGRATION.md) | Wiring best practices into agent toolchains (three-layer model) |
 | [Safety](agent-operational-guides/beads-rust/SAFETY.md) | Sync guards, history, data protection |
 
 ---
@@ -45,7 +47,7 @@ Agent skill for tracking multi-session work with `br` (beads_rust). Covers sessi
 |----------|---------|
 | [SKILL.md](agent-scripts/br-issue-tracking/SKILL.md) | Full skill: session workflow, core commands, sync protocol, config, migration, troubleshooting |
 
-Key concepts: explicit sync (never automatic git), `--claim` for atomic assignment, resumable notes structure (COMPLETED / IN_PROGRESS / NEXT / BLOCKERS), safety guards against data loss.
+Key concepts: explicit sync (never automatic git), `--claim` for atomic assignment, resumable notes structure (COMPLETED / IN_PROGRESS / NEXT / BLOCKERS), safety guards against data loss, quality enforcement (field separation, self-contained issues, traceable close reasons, `br lint` validation).
 
 #### [Plan-Pact](agent-scripts/plan-pact/)
 
